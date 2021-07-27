@@ -1,2 +1,2 @@
-# Java Script Parser
+# JavaScript Parser
 https://artur-shvets.github.io/js-parser/
