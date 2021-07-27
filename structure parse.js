@@ -69,7 +69,7 @@ function createRowBlock (rowText) {
 function createRow (rowText) {
   rowBlock = document.createElement('div');
   rowBlock.classList.add('row');
-  rowText = rowText.replace(/^\s+/, (g0, index) => {
+  rowText = rowText.replace(/^\s*/, (g0, index) => {
     return ''
   });
   rowBlock.innerHTML = getHighlightText(rowText);
@@ -78,22 +78,23 @@ function createRow (rowText) {
 function createIndent () {
   identBlock = document.createElement('div');
   identBlock.classList.add('ident-block');
+  identBlock.innerText = '\n';
   input.append(identBlock);
 }
 
 function getPreviousBlocks () {
   if (mainBlock.classList.contains('main-parent') != true) {
-    subBlock = subBlock.parentElement;
-    mainBlock = mainBlock.parentElement;
-    subBlock = subBlock.parentElement;
-    mainBlock = mainBlock.parentElement;
+    subBlock = mainBlock.parentElement;
+    mainBlock = subBlock.parentElement;
   } else {
-    mainParent = false
+    mainParent = false;
+    mainBlock = false;
+    subBlock = false;
   }
 }
 
 let countIdent = 0;
-function parcerCore() {
+function parserCore() {
   inputText = input.innerText.split('\n');
   input.innerText = null;
   inputText.forEach((rowText) => {
@@ -111,18 +112,17 @@ function parcerCore() {
       mainBlock.append(rowBlock);
       getPreviousBlocks();
     } else if (openBrace && closedBrace) {
-      mainBlock = rowBlock.parentElement;
-      mainBlock = mainBlock.parentElement;
-      if (rowBlock.parentElement.classList.contains('main-block')) {
-        mainBlock = mainBlock.parentElement;
-      }
       createRow(rowText);
       mainBlock.append(rowBlock);
       createSubBlock();
     } else {
       if (mainParent) {
         createRowBlock(rowText);
-        subBlock.append(rowBlock);
+        if (subBlock) {
+          subBlock.append(rowBlock);
+        } else {
+          mainBlock.append(rowBlock);
+        }
       } else {
         if (rowText.length == 0) {
           countIdent += 1;
@@ -133,6 +133,8 @@ function parcerCore() {
         } else {
           createParent(rowText);
           mainParent = false;
+          mainBlock = false;
+          subBlock = false;
         }
       }
     }

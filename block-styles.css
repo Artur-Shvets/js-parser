@@ -47,10 +47,6 @@ body {
   top: 12px;
 }
 
-.ident-block {
-  height: 18px;
-}
-
 .p-left-right {
   padding: 0 4px;
 }
@@ -121,6 +117,10 @@ body {
   margin: 20px;
 }
 
+.ident-block {
+  border-radius: 10px;
+}
+
 .block {
   transition: 0.3s;
   border-radius: 10px;
@@ -156,11 +156,6 @@ body {
   transition: 0.6s;
   border-radius: 15px;
   margin-left: 14px;
-  display: block;
-  transform: scale(0, 0);
-  opacity: 0;
-  height: 0;
-  visibility: collapse;
 }
 
 .sub-block:hover {
@@ -200,13 +195,6 @@ body {
 .main-block:hover .sub-block-default {
   border-radius: 15px;
   padding: 10px;
-}
-
-.main-block:hover > .sub-block {
-  transform: scale(1, 1);
-  opacity: 1;
-  visibility: visible;
-  height: auto;
 }
 
 /* ___________________________COLORS and SHADOWS________________________ */
