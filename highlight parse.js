@@ -6,7 +6,7 @@ const patterns = {
   backQuotes: /`(.*?)\${(.*?)}(.*?)`/gm,
   strings: /(["'])(.+?)\1/gm,
   arguments: /\(([^(]+?)\).*?=>/gm,
-  keyWords: /(=>|break|case|class|catch|const|continue|debugger|default|delete|do|else|export|extends|finally|function|if|import|in|instanceof|let|new|return|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/gm,
+  keyWords: /\b(=>|break|case|class|catch|const|continue|debugger|default|delete|do|else|export|extends|finally|function|if|import|in|instanceof|let|new|return|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/gm,
   literals: /(null|true|false)\b/gm,
   interfaces: /(window|document|console)\./gm,
   objects: /(?<=\.)(\w+)/gm,
@@ -83,7 +83,7 @@ function getHighlightText (rowText) {
   });
   rowText = rowText.replace(patterns.objects, (g0, g1, index) => {
     if (g1 == 'length') {
-      composeText[index] = `<span class="block ash-string ash-shadow">${g1}</span>`;
+      composeText[index] = `<span class="block white-string white-shadow">${g1}</span>`;
     } else {
       composeText[index] = `<span class="block blue-string blue-shadow">${g1}</span>`;
     }
@@ -94,7 +94,7 @@ function getHighlightText (rowText) {
     return '~'.repeat(g0.length)
   });
   rowText.replace(patterns.words, (g0, index) => {
-    composeText[index] = `<span class="block ash-string ash-shadow">${g0}</span>`;
+    composeText[index] = `<span class="block white-string white-shadow">${g0}</span>`;
   });
   rowText.replace(patterns.symbols, (g0, index) => {
     composeText[index] = `<span class="cyan-string">${g0}</span>`;

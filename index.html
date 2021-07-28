@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="block-styles.css">
+  <link rel="stylesheet" href="dark light mode.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
   <title>JS Parser</title>
@@ -11,13 +12,18 @@
 
 <body>
   <h2 class="title">input js code</h2>
+  <label class="switch">
+    <input type="checkbox" onclick="changeMode()">
+    <span class="slider round"></span>
+  </label>
   <button class="btn-parse" onclick="parserCore()">Parse</button>
   <div id="input" class="editor" contenteditable="true" autofocus></div>
 </body>
 <footer>
   <script src="highlight parse.js"></script>
   <script src="structure parse.js"></script>
-  <script src="event control.js"></script>
+  <script src="dark light mode.js"></script>
+  <!-- <script src="event control.js"></script> -->
 </footer>
 
 </html>

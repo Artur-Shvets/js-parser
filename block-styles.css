@@ -1,26 +1,30 @@
 body {
+  transition: 0.3s;
   margin: 0;
-  background-color: rgb(15%, 10%, 22%, 1);
+  background-color: var(--main-color);
   font-family: Consolas, monospace;
   font-size: 14px;
   line-height: 1.4;
-  color: #EEFFFF;
+  color: var(--string-color);
 }
 
 .title {
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center
+  color: #ccc;
+  text-align: center;
 }
 
 .editor {
-  background-color: #263238;
-  height: calc(100vh - 90px);
+  transition: 0.3s;
+  background-color: var(--sub-color);
+  height: calc(100vh - 91px);
   width: calc(100% - 40);
   margin: 5px;
   padding: 10px;
-  overflow: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
@@ -31,20 +35,26 @@ body {
 ::-webkit-scrollbar-thumb {
   transition: 0.3s;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.1);
-
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #ccc;
+  opacity: 0.1;
 }
 
 .btn-parse {
+  transition: 0.3s;
+  cursor: pointer;
   position: absolute;
   height: 40px;
   width: 120px;
   right: 20px;
   top: 12px;
+  background-color: #ccc;
+  /* color: var(--black-white); */
+  border-radius: 20px;
+  border: none;
+}
+
+.btn-parse:hover {
+  background-color: rgba(204, 204, 204, 0.5);
 }
 
 .p-left-right {
@@ -147,9 +157,8 @@ body {
 .row-block:hover {
   border-radius: 20px;
   padding: 5px 10px;
-  background-color: #263238;
-  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
-              10px 10px 8px rgba(0, 0, 0, 0.4)
+  background-color: var(--main-color);
+  box-shadow: var(--shadow);
 }
 
 .sub-block {
@@ -161,9 +170,7 @@ body {
 .sub-block:hover {
   padding: 5px;
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: inset 4px 4px 16px rgba(255, 255, 255, 0.2),
-              inset -1px -1px 3px rgba(255, 255, 255, 0.35)
+  background-color: var(--sub-color);
 }
 
 .sub-block-default {
@@ -175,10 +182,11 @@ body {
 .sub-block-default:hover {
   padding: 5px;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: var(--sub-color);
 }
 
 .main-block {
+  background-color: var(--main-color);
   display: table;
   transition: 0.3s;
   border-radius: 15px;
@@ -187,15 +195,18 @@ body {
 .main-block:hover {
   border-radius: 20px;
   padding: 5px;
-  background-color: #263238;
-  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
-              10px 10px 8px rgba(0, 0, 0, 0.4)
+  background-color: var(--main-color);
+  box-shadow: var(--shadow);
 }
 
 .main-block:hover .sub-block-default {
   border-radius: 15px;
   padding: 10px;
 }
+
+/* .main-parent {
+  box-shadow: var(--shadow);
+} */
 
 /* ___________________________COLORS and SHADOWS________________________ */
 
@@ -282,11 +293,12 @@ body {
 }
 
 .white-string {
-  color: white;
+  color: var(--string-color);
 }
 
-.white-shadow {
-  box-shadow: 0 0 4px white;
+.white-shadow:hover {
+  border: 1px solid var(--string-color);
+  box-shadow: var(--string-shadow);
 }
 
 /* @very-light-gray:   #EEFFFF;
