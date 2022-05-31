@@ -16,15 +16,17 @@ body {
 .editor {
   transition: 0.3s;
   background-color: var(--sub-color);
+  /* background-color: pink; */
   height: calc(100vh - 91px);
-  width: calc(100% - 40);
-  margin: 5px;
+  width: calc(100vw - 80px);
+  margin: 5px auto;
   padding: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
   outline: none;
   border: 1px solid #ccc;
   border-radius: 10px;
+  box-shadow: 40 40 80px white;
 }
 
 ::-webkit-scrollbar {
@@ -77,7 +79,7 @@ body {
 .vertex {
   padding: 5px;
   display: inline-block;
-  background-color: #C792EA;
+  background-color: #c792ea;
   border-radius: 5px;
 }
 
@@ -99,7 +101,7 @@ body {
 .paste-block {
   transition: 0.3s;
   position: relative;
-  background-color: #EEFFFF;
+  background-color: #eeffff;
   box-shadow: 0 0 12px rgb(181, 255, 236);
   border: 1px solid rgb(181, 255, 236);
   padding: 10px 0;
@@ -144,14 +146,14 @@ body {
 .row {
   border-radius: 15px;
   padding: 0 5px;
-  display: table
+  display: table;
 }
 
 .row-block {
   border-radius: 15px;
   padding: 0 5px;
   display: table;
-  transition: 0.3s
+  transition: 0.3s;
 }
 
 .row-block:hover {
@@ -211,75 +213,75 @@ body {
 /* ___________________________COLORS and SHADOWS________________________ */
 
 .ash-string {
-  color: #EEFFFF;
+  color: #eeffff;
 }
 
 .ash-shadow:hover {
-  border: 1px solid #EEFFFF;
-  box-shadow: 0 0 12px #EEFFFF;
+  border: 1px solid #eeffff;
+  box-shadow: 0 0 12px #eeffff;
 }
 
 .red-string {
-  color: #F07178;
+  color: #f07178;
 }
 
 .red-shadow:hover {
-  border: 1px solid #F07178;
-  box-shadow: 0 0 12px #F07178;
+  border: 1px solid #f07178;
+  box-shadow: 0 0 12px #f07178;
 }
 
 .strong-orange-string {
-  color: #F78C6A;
+  color: #f78c6a;
 }
 
 .strong-orange-shadow:hover {
-  border: 1px solid #F78C6A;
-  box-shadow: 0 0 12px #F78C6A;
+  border: 1px solid #f78c6a;
+  box-shadow: 0 0 12px #f78c6a;
 }
 
 .orange-string {
-  color: #FFCB6B;
+  color: #ffcb6b;
 }
 
 .orange-shadow:hover {
-  border: 1px solid #FFCB6B;
-  box-shadow: 0 0 12px #FFCB6B;
+  border: 1px solid #ffcb6b;
+  box-shadow: 0 0 12px #ffcb6b;
 }
 
 .blue-string {
-  color: #82AAFF;
+  color: #82aaff;
 }
 
 .blue-shadow:hover {
-  border: 1px solid #82AAFF;
-  box-shadow: 0 0 12px #82AAFF;
+  border: 1px solid #82aaff;
+  box-shadow: 0 0 12px #82aaff;
 }
 
 .purple-string {
-  color: #C792EA;
+  color: #c792ea;
 }
 
 .purple-shadow:hover {
-  border: 1px solid #C792EA;
-  box-shadow: 0 0 12px #C792EA;
+  border: 1px solid #c792ea;
+  box-shadow: 0 0 12px #c792ea;
 }
 
 .cyan-string {
-  color: #89DDF3;
+  color: #89ddf3;
 }
 
 .cyan-shadow:hover {
-  border: 1px solid #89DDF3;
-  box-shadow: 0 0 4px #89DDF3;
+  border: 1px solid #89ddf3;
+  box-shadow: 0 0 4px #89ddf3;
 }
 
 .green-string {
-  color: #C3E88D;
+  color: #c3e88d;
 }
 
 .green-shadow:hover {
-  border: 1px solid #C3E88D;
-  box-shadow: 0 0 12px #C3E88D;
+  border: 1px solid #c3e88d;
+  box-shadow: 0 0 12px #c3e88d;
 }
 
 .gray-string {
