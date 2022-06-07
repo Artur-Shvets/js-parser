@@ -1,4 +1,4 @@
-export * from './Patterns.js';
+export * from '../Patterns.js';
 export * from './getAngleBrackets.js';
 export * from './getRegex.js';
 export * from './getStrings.js';
@@ -21,3 +21,4 @@ export * from './getCloseMultiComments.js';
 export * from './getOpenMultiComments.js';
 export * from './getOneLineMultiComments.js';
 export * from './addNameOfFunc.js';
+export * from './getTags.js';

@@ -8,6 +8,7 @@ import {
   createRowBlock,
   getPreviousBlocks,
   checkIsEmpty,
+  patterns,
 } from './hooks/index.js';
 
 let input = document.getElementById('input');
@@ -33,8 +34,18 @@ export function parserCore() {
 
     [isEmpty, emptyRowsCount] = checkIsEmpty(rowText, isEmpty, emptyRowsCount);
     if (isEmpty || rowText) {
-      openBrace = /[{[(]\s*(\/\/|$)/g.test(rowText);
-      closedBrace = /^\s*?[}\])]/g.test(rowText);
+      if (/(<.*?|.*?>)\s*?(\/\/|$)/g.test(rowText)) {
+        openBrace = /<[^\/]+>?$/g.test(rowText);
+        closedBrace = /^\s*?(<\/.*?>|\/>)\s*?(\/\/|$)/g.test(rowText);
+        // if (openBrace && closedBrace) {
+        //   openBrace = false;
+        //   closedBrace = false;
+        // }
+      } else {
+        openBrace = /(\{|\[|\(|:)\s*(\/\/|$)/g.test(rowText);
+        closedBrace = /^\s*?(\}|\]|\))/g.test(rowText);
+      }
+
       if (openBrace && !closedBrace) {
         if (mainParent) {
           [input, mainBlock, subBlock, rowBlock] = createMainBlock(
@@ -74,6 +85,7 @@ export function parserCore() {
           } else {
             rowBlock = createRowBlock(rowText, rowBlock);
           }
+
           if (subBlock) {
             subBlock.append(rowBlock);
           } else {
@@ -84,7 +96,7 @@ export function parserCore() {
             createEmpty();
             input.append(rowBlock);
           } else {
-            [input, mainParent, mainBlock, subBlock, rowBlock] = createParent(
+            createParent(
               rowText,
               input,
               mainParent,
@@ -92,6 +104,7 @@ export function parserCore() {
               subBlock,
               rowBlock
             );
+
             mainParent = false;
             mainBlock = false;
             subBlock = false;

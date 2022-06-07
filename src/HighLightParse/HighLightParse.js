@@ -22,6 +22,7 @@ import {
   getWords,
   getSymbols,
   getSpaces,
+  getTags,
 } from './hooks/index.js';
 
 let composeText;
@@ -58,13 +59,13 @@ export function getHighLight(rowText) {
     );
   }
 
-  [rowText, composeText] = getComments(rowText, composeText);
-
   [rowText, composeText] = getOneLineBackQuotes(rowText, composeText);
   // ____________________________Comments_____________________________________
 
   [rowText, composeText] = getStrings(rowText, composeText);
+  [rowText, composeText] = getComments(rowText, composeText);
   [rowText, composeText] = getRegex(rowText, composeText);
+  [rowText, composeText] = getTags(rowText, composeText);
 
   // ______________________________________________________________Before
   [rowText, composeText] = getKeys(rowText, composeText);

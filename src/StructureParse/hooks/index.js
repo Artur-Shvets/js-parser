@@ -1,4 +1,5 @@
 export * from '../../HighLightParse/HighLightParse.js';
+export * from '../../HighLightParse/Patterns.js';
 export * from './addColorForBlock.js';
 export * from './createParent.js';
 export * from './createRow.js';
