@@ -1,8 +1,6 @@
 export const patterns = {
   regex: /\/.+\/\w*/g,
-  // openClosedBrace: />.+?<\/|<.+?\/>/g,
   openAngle: /(^\s*?>|<[^<\/]*?[^\/]>|<\w*?)\s*?(\/\/|\/\*|$)/,
-  // closedAngle: /^\s*?(<\/.*?>|\/?>)\s*?(\/\/|\/\*|$)/,
   closedAngle: /^\s*?(<\/.*?>|\/?>)/,
   angleBrace: /(<)|(>)/g,
   openBrackets: /(\{|\[|\(|:)\s*(\/\/|$)/,
@@ -20,7 +18,6 @@ export const patterns = {
   arguments: /\(([^(]+?)\).*?=>/,
   keyWords:
     /\b(=>|break|case|class|catch|const|continue|debugger|default|delete|do|else|export|extends|finally|function|for|from|if|import|in|instanceof|let|new|return|super|switch|this|throw|try|type|typeof|var|void|while|with|yield)\b/g,
-  // keys: /(?<![const|let|var])\s+?(\w+)(?=:|\s*?=)/g,
   keys: /\w+(?=:)/g,
   variables: /(?<!\.)\b\w+(?=\s*?=)/g,
   constants: /(?<!>)\b[A-Z_?]+\b(?!<)/,
