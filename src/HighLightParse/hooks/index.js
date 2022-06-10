@@ -22,3 +22,5 @@ export * from './getOpenMultiComments.js';
 export * from './getOneLineMultiComments.js';
 export * from './addNameOfFunc.js';
 export * from './getTags.js';
+export * from './getVariables.js';
+export * from './getConstants.js';
