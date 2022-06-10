@@ -34,17 +34,11 @@ export function parserCore() {
 
     [isEmpty, emptyRowsCount] = checkIsEmpty(rowText, isEmpty, emptyRowsCount);
     if (isEmpty || rowText) {
-      if (/(<.*?|.*?>)\s*?(\/\/|$)/g.test(rowText)) {
-        openBrace = /<[^\/]+>?$/g.test(rowText);
-        closedBrace = /^\s*?(<\/.*?>|\/>)\s*?(\/\/|$)/g.test(rowText);
-        // if (openBrace && closedBrace) {
-        //   openBrace = false;
-        //   closedBrace = false;
-        // }
-      } else {
-        openBrace = /(\{|\[|\(|:)\s*(\/\/|$)/g.test(rowText);
-        closedBrace = /^\s*?(\}|\]|\))/g.test(rowText);
-      }
+      openBrace =
+        patterns.openAngle.test(rowText) || patterns.openBrackets.test(rowText);
+      closedBrace =
+        patterns.closedAngle.test(rowText) ||
+        patterns.closedBrackets.test(rowText);
 
       if (openBrace && !closedBrace) {
         if (mainParent) {
@@ -66,7 +60,7 @@ export function parserCore() {
           );
           [subBlock, mainBlock] = createSubBlock(subBlock, mainBlock);
         }
-      } else if (!openBrace && closedBrace) {
+      } else if (!openBrace && closedBrace && mainBlock) {
         rowBlock = createRow(rowText, rowBlock);
         mainBlock.append(rowBlock);
         [mainParent, mainBlock, subBlock] = getPreviousBlocks(

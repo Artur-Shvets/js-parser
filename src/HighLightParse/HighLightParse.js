@@ -23,12 +23,13 @@ import {
   getSymbols,
   getSpaces,
   getTags,
+  getVariables,
+  getConstants,
 } from './hooks/index.js';
 
 let composeText;
 let functionNames = [];
 let isOpenComment = false;
-let openBackQuotes = false;
 
 export function getHighLight(rowText) {
   composeText = [];
@@ -65,10 +66,14 @@ export function getHighLight(rowText) {
   [rowText, composeText] = getStrings(rowText, composeText);
   [rowText, composeText] = getComments(rowText, composeText);
   [rowText, composeText] = getRegex(rowText, composeText);
-  [rowText, composeText] = getTags(rowText, composeText);
+  [rowText, composeText] = getTags(rowText, composeText); //  Tags
 
   // ______________________________________________________________Before
   [rowText, composeText] = getKeys(rowText, composeText);
+
+  [rowText, composeText] = getVariables(rowText, composeText);
+
+  [rowText, composeText] = getConstants(rowText, composeText);
 
   [rowText, composeText] = getArguments(rowText, composeText);
 
