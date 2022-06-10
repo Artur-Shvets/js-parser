@@ -37,12 +37,10 @@ export function getHighLight(rowText) {
   if (!rowText) {
     return `<br>`;
   }
-
   // ____________________________Comments_____________________________________
   if (isOpenComment && !patterns.closeMultiComments.test(rowText)) {
     return `<span class="gray-string">${rowText}</span>`;
   }
-
   [rowText, composeText] = getOneLineMultiComments(rowText, composeText);
 
   if (!isOpenComment) {
@@ -66,7 +64,7 @@ export function getHighLight(rowText) {
   [rowText, composeText] = getStrings(rowText, composeText);
   [rowText, composeText] = getComments(rowText, composeText);
   [rowText, composeText] = getRegex(rowText, composeText);
-  [rowText, composeText] = getTags(rowText, composeText); //  Tags
+  [rowText, composeText] = getTags(rowText, composeText);
 
   // ______________________________________________________________Before
   [rowText, composeText] = getKeys(rowText, composeText);

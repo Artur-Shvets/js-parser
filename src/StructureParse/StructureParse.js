@@ -11,7 +11,7 @@ import {
   patterns,
 } from './hooks/index.js';
 
-let input = document.getElementById('input');
+export let input = document.getElementById('input');
 let inputText;
 let openBrace;
 let closedBrace;

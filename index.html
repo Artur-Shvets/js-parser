@@ -13,14 +13,21 @@
   </head>
 
   <body>
-    <h2 class="title">input js code</h2>
+    <div class="header">
+      <div class="buttons-left">
+        <label class="switch">
+          <input type="checkbox" id="change-mode" />
+          <span class="slider round"></span>
+        </label>
+        <input type="file" id="uploader" class="uploader" webkitdirectory />
+      </div>
 
-    <label class="switch">
-      <input type="checkbox" id="change-mode" />
-      <span class="slider round"></span>
-    </label>
-
-    <button class="btn-parse">Parse</button>
+      <h2>input js code | upload directories</h2>
+      <div class="buttons-right">
+        <button class="btn btn-parse">Parse</button>
+        <button class="btn btn-upload">Upload</button>
+      </div>
+    </div>
 
     <div id="input" class="editor" contenteditable="true" autofocus></div>
   </body>
