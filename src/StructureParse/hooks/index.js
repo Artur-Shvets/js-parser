@@ -1,5 +1,4 @@
-export * from '../../HighLightParse/HighLightParse.js';
-export * from '../../HighLightParse/Patterns.js';
+export * from '../../HighLightParse/hooks/index.js';
 export * from './addColorForBlock.js';
 export * from './createParent.js';
 export * from './createRow.js';
@@ -8,3 +7,5 @@ export * from './createSubBlock.js';
 export * from './createRowBlock.js';
 export * from './getPreviousBlocks.js';
 export * from './checkIsEmpty.js';
+export * from './getLevels.js';
+export * from './updateInfoList.js';

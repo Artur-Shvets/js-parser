@@ -1,102 +1,64 @@
-'use strict';
-
 import {
-  patterns,
   getRegex,
-  getStrings,
-  getOneLineMultiComments,
-  getOpenMultiComments,
-  getCloseMultiComments,
-  getComments,
-  getOneLineBackQuotes,
   getKeys,
   getArguments,
-  getFuncNameAndArgs,
-  getAllFuncNames,
   getKeyWords,
   getLiterals,
   getInterfaces,
-  getCallFunctions,
+  getDeclarations,
+  getAllCalls,
   getObjects,
   getNumbers,
   getWords,
   getSymbols,
   getSpaces,
   getTags,
-  getVariables,
   getConstants,
+  getAllComments,
 } from './hooks/index.js';
 
-let composeText;
-let functionNames = [];
-let isOpenComment = false;
+export let functionNames = [];
+export let variableNames = [];
+// let isOpenComment = false;
+let composeText = [];
 
-export function getHighLight(rowText) {
-  composeText = [];
-
+export function getHighLight(
+  rowText,
+  isNewParent = false,
+  needCheckComments = false
+) {
   if (!rowText) {
-    return `<br>`;
+    return '<br>';
   }
-  // ____________________________Comments_____________________________________
-  if (isOpenComment && !patterns.closeMultiComments.test(rowText)) {
-    return `<span class="gray-string">${rowText}</span>`;
-  }
-  [rowText, composeText] = getOneLineMultiComments(rowText, composeText);
-
-  if (!isOpenComment) {
-    [rowText, composeText] = getOpenMultiComments(
-      rowText,
-      composeText,
-      isOpenComment
-    );
+  if (needCheckComments) {
+    composeText = [];
+    [rowText, composeText] = getAllComments(rowText, composeText);
+    composeText = composeText;
+    return rowText;
   }
 
-  if (isOpenComment) {
-    [rowText, composeText, isOpenComment] = getCloseMultiComments(
-      rowText,
-      composeText
-    );
-  }
-
-  [rowText, composeText] = getOneLineBackQuotes(rowText, composeText);
-  // ____________________________Comments_____________________________________
-
-  [rowText, composeText] = getStrings(rowText, composeText);
-  [rowText, composeText] = getComments(rowText, composeText);
-  [rowText, composeText] = getRegex(rowText, composeText);
-  [rowText, composeText] = getTags(rowText, composeText);
-
+  [rowText, composeText] = getTags(rowText, composeText, isNewParent);
   // ______________________________________________________________Before
-  [rowText, composeText] = getKeys(rowText, composeText);
+  [rowText, composeText] = getKeyWords(rowText, composeText);
 
-  [rowText, composeText] = getVariables(rowText, composeText);
+  [rowText, composeText] = getDeclarations(rowText, composeText, isNewParent);
+
+  [rowText, composeText] = getAllCalls(rowText, composeText, isNewParent);
+
+  [rowText, composeText] = getKeys(rowText, composeText);
 
   [rowText, composeText] = getConstants(rowText, composeText);
 
   [rowText, composeText] = getArguments(rowText, composeText);
 
-  [rowText, composeText] = getFuncNameAndArgs(
-    rowText,
-    composeText,
-    functionNames
-  );
-
-  [rowText, composeText] = getAllFuncNames(rowText, composeText);
-
-  [rowText, composeText] = getKeyWords(rowText, composeText);
-
   [rowText, composeText] = getLiterals(rowText, composeText);
 
   [rowText, composeText] = getInterfaces(rowText, composeText);
 
-  [rowText, composeText] = getCallFunctions(rowText, composeText);
-
   [rowText, composeText] = getObjects(rowText, composeText);
 
   [rowText, composeText] = getNumbers(rowText, composeText);
-
   // ______________________________________________________________After
-
   [rowText, composeText] = getWords(rowText, composeText);
 
   [rowText, composeText] = getSymbols(rowText, composeText);
