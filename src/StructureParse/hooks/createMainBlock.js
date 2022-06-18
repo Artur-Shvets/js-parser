@@ -1,8 +1,6 @@
 import { addColorForBlock, createRow, createSubBlock } from './index.js';
 
 export function createMainBlock(rowText, input, mainBlock, subBlock, rowBlock) {
-  // let [input, mainParent, mainBlock, subBlock, rowBlock] = allBlocks;
-
   mainBlock = document.createElement('div');
   mainBlock.classList.add('main-block');
   subBlock.append(mainBlock);

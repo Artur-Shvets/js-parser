@@ -1,5 +1,3 @@
-'use strict';
-
 import {
   createParent,
   createRow,
@@ -9,6 +7,10 @@ import {
   getPreviousBlocks,
   checkIsEmpty,
   patterns,
+  getAllDeclarations,
+  getLevels,
+  getHighLight,
+  infoList,
 } from './hooks/index.js';
 
 export let input = document.getElementById('input');
@@ -27,6 +29,7 @@ function createEmpty() {
 }
 
 export function parserCore() {
+  getAllDeclarations(input.innerText);
   inputText = input.innerText.split('\n');
   input.innerText = null;
   inputText.forEach(rowText => {
@@ -34,6 +37,10 @@ export function parserCore() {
 
     [isEmpty, emptyRowsCount] = checkIsEmpty(rowText, isEmpty, emptyRowsCount);
     if (isEmpty || rowText) {
+      if (!isEmpty) {
+        rowText = getHighLight(rowText, false, true);
+      }
+
       openBrace =
         patterns.openAngle.test(rowText) || patterns.openBrackets.test(rowText);
       closedBrace =
@@ -107,4 +114,6 @@ export function parserCore() {
       }
     }
   });
+  console.log('parentList >>>', infoList);
+  // getLevels(input);
 }

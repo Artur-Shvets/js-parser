@@ -1,5 +1,3 @@
-'use strict';
-
 let darkMode = true;
 let root = document.querySelector(':root');
 

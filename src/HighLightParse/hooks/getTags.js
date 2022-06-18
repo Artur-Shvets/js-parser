@@ -1,13 +1,17 @@
-import { patterns, getAngleBrackets } from './index.js';
+import { patterns, updateInfoList, getAngleBrackets } from './index.js';
 
 export function getTags(text, composeText) {
   text = text.replace(patterns.tags, (g0, g1, g2, g3, index) => {
-    let color = patterns.allTagsNames.test(g2) ? 'red' : 'orange';
-    // g1 = getAngleBrackets(g1);
-    // g3 = getAngleBrackets(g3);
+    let id = updateInfoList({
+      call: true,
+      name: g2,
+      role: 'react-component',
+    });
+    let className = id ? 'orange-string call-comp ' + g2 : 'red-string';
+    id = id && `id="${id}"`;
     composeText[
       index + g1.length
-    ] = `<span class="${color}-string">${g2}</span>`;
+    ] = `<span ${id} class="${className}">${g2}</span>`;
 
     return `${g1}${'~'.repeat(g2.length)}${g3}`;
   });

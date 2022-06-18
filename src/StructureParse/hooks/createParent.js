@@ -8,16 +8,14 @@ export function createParent(
   subBlock,
   rowBlock
 ) {
-  // let [input, mainParent, mainBlock, subBlock, rowBlock] = allBlocks;
-
   mainParent = document.createElement('div');
   mainParent.classList.add('main-block', 'main-parent');
-  mainBlock = mainParent;
-  mainParent.setAttribute('contenteditable', 'true');
+  mainParent.setAttribute('contenteditable', 'false');
   mainParent = addColorForBlock(mainParent, rowText);
   input.append(mainParent);
-  rowBlock = createRow(rowText, rowBlock);
+  rowBlock = createRow(rowText, rowBlock, true);
   mainParent.append(rowBlock);
+  mainBlock = mainParent;
 
   return [input, mainParent, mainBlock, subBlock, rowBlock];
 }
