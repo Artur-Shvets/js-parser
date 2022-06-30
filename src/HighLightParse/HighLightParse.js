@@ -1,5 +1,4 @@
 import {
-  getRegex,
   getKeys,
   getArguments,
   getKeyWords,
@@ -16,12 +15,9 @@ import {
   getConstants,
   getAllComments,
 } from './hooks/index.js';
-
-export let functionNames = [];
-export let variableNames = [];
-// let isOpenComment = false;
 let composeText = [];
 
+// ______________________________________________________________HIGHLIGHT () => {}
 export function getHighLight(
   rowText,
   isNewParent = false,
@@ -30,14 +26,15 @@ export function getHighLight(
   if (!rowText) {
     return '<br>';
   }
+
   if (needCheckComments) {
     composeText = [];
     [rowText, composeText] = getAllComments(rowText, composeText);
-    composeText = composeText;
     return rowText;
   }
 
   [rowText, composeText] = getTags(rowText, composeText, isNewParent);
+
   // ______________________________________________________________Before
   [rowText, composeText] = getKeyWords(rowText, composeText);
 

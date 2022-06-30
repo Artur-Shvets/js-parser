@@ -9,3 +9,4 @@ export * from './getPreviousBlocks.js';
 export * from './checkIsEmpty.js';
 export * from './getLevels.js';
 export * from './updateInfoList.js';
+export * from './getLevels.js';

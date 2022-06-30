@@ -1,7 +1,7 @@
 import { patterns, updateInfoList } from './index.js';
 
 export function getAllCalls(text, composeText, isNewParent) {
-  text = text.replace(/(\w+?)(?=\s*?\()/g, (g0, g1, index) => {
+  text = text.replace(patterns.callFunctions, (g0, g1, index) => {
     let id = g1
       ? `id="${updateInfoList({
           call: true,
@@ -17,7 +17,7 @@ export function getAllCalls(text, composeText, isNewParent) {
     return '~'.repeat(g1.length);
   });
 
-  text = text.replace(/(?<!\.)\b\w+/g, (g0, index) => {
+  text = text.replace(patterns.callVariables, (g0, index) => {
     let color = patterns.constants.test(g0) ? 'red' : 'white';
     let id = g0
       ? `id="${updateInfoList({
