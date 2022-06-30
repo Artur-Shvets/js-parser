@@ -114,6 +114,5 @@ export function parserCore() {
       }
     }
   });
-  console.log('parentList >>>', infoList);
-  // getLevels(input);
+  getLevels(infoList);
 }

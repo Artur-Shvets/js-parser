@@ -23,7 +23,7 @@ input.addEventListener('drop', e => {
 
 function readFiles(files) {
   for (let file of files) {
-    if (/.(js|jsx|ts|tsx|css|scss|html)$/.test(file.name)) {
+    if (/\.(js|jsx|ts|tsx)$/.test(file.name)) {
       let reader = new FileReader();
       reader.readAsText(file);
 
