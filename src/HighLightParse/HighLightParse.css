@@ -70,6 +70,7 @@ body {
   overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 10px;
+  white-space: pre-wrap;
 }
 
 /* ___________________________SCROLL-BAR________________________ */

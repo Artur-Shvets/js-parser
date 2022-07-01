@@ -42,7 +42,7 @@ export function updateInfoList({
       result = id;
     } else {
       let index = infoList.parentList.length && infoList.parentList.length - 1;
-      infoList.parentList[index].callList.push(newBlock);
+      infoList.parentList[index]?.callList.push(newBlock);
       result = id;
     }
   }

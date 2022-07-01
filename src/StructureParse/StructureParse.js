@@ -14,6 +14,7 @@ import {
 } from './hooks/index.js';
 
 export let input = document.getElementById('input');
+export let allText = [];
 let inputText;
 let openBrace;
 let closedBrace;
@@ -29,8 +30,8 @@ function createEmpty() {
 }
 
 export function parserCore() {
-  getAllDeclarations(input.innerText);
-  inputText = input.innerText.split('\n');
+  getAllDeclarations(allText.join('\n'));
+  inputText = allText.join('\n').split('\n');
   input.innerText = null;
   inputText.forEach(rowText => {
     rowText = rowText.replace(/^\s*/, '');

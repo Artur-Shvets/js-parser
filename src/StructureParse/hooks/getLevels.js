@@ -1,52 +1,46 @@
 export function getLevels(infoList) {
-  let callNames = [];
-
   infoList.parentList.forEach(parentItem => {
+    let callNames = [];
     parentItem.callList?.forEach(callItem => {
       callNames.push(callItem.name);
     });
+    callNames.length &&
+      (parentItem.callNames = [...new Set(callNames)].filter(Boolean));
   });
 
-  let lvlId = 0;
-  let firstLevel = infoList.parentList.map(parent => {
+  let currentLevel = infoList.parentList.map(parent => {
     parent = new Map(Object.entries(parent));
     parent.delete('callList');
     return Object.fromEntries(parent);
   });
 
-  callNames = [...[...new Set(callNames)].filter(Boolean)];
-  infoList.levelsList = [firstLevel];
-  let currentLevel = infoList.levelsList[0];
+  infoList.levelsList = [];
 
   while (true) {
-    let secondLevel = [];
+    let nextLevel = [];
+    let callNames = [];
+    currentLevel.forEach(item => {
+      item.callNames && callNames.push(...item.callNames);
+    });
+    callNames.length && (callNames = [...new Set(callNames)].filter(Boolean));
+
     currentLevel.forEach((item, i) => {
       if (callNames.includes(item.name)) {
-        secondLevel.push(item);
-        delete callNames[callNames.indexOf(item.name)];
+        nextLevel.push(item);
         delete currentLevel[i];
       }
     });
 
-    currentLevel = [...[...new Set(currentLevel)].filter(Boolean)];
-    callNames = [...[...new Set(callNames)].filter(Boolean)];
-
-    if (secondLevel.length) {
-      infoList.levelsList.push(secondLevel);
-      currentLevel = secondLevel;
-      lvlId++;
-    } else {
-      currentLevel.forEach((item, i) => {
-        if (item.role === 'variable') {
-          secondLevel.push(item);
-          delete currentLevel[i];
-          currentLevel = [...[...new Set(currentLevel)].filter(Boolean)];
-        }
-      });
-      infoList.levelsList.push(secondLevel);
+    currentLevel = currentLevel.filter(Boolean);
+    if (!currentLevel.length) {
+      nextLevel.length &&
+        infoList.levelsList[infoList.levelsList.length - 1].push(...nextLevel);
       break;
     }
+
+    infoList.levelsList.push(currentLevel);
+    currentLevel = nextLevel;
   }
+
   console.log('infoList', infoList);
-  console.log('callNames', callNames);
 }

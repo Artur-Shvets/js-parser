@@ -18,7 +18,6 @@ export * from './getStrings.js';
 // ======================================== <<<< Before >>>>
 export * from './getKeyWords.js';
 // ________________________________________ ALL DECLARATION
-export * from './getAllFuncNames.js';
 export * from './getAllDeclarations.js';
 // __________________________________________ ALL CALLS
 export * from './getAllCalls.js';

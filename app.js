@@ -1,8 +1,8 @@
 'use strict';
 
 import { changeMode } from './src/DarkLightMode/DarkLightMode.js';
-import { parserCore } from './src/StructureParse/StructureParse.js';
-import { input } from './src/StructureParse/StructureParse.js';
+import { input, parserCore } from './src/StructureParse/StructureParse.js';
+import { allText } from './src/StructureParse/StructureParse.js';
 
 let parseButton = document.querySelector('.btn-parse');
 parseButton.addEventListener('click', () => parserCore());
@@ -10,11 +10,17 @@ parseButton.addEventListener('click', () => parserCore());
 let changeModeToggle = document.querySelector('#change-mode');
 changeModeToggle.addEventListener('click', () => changeMode());
 
-let uploadInput = document.querySelector('.uploader');
-uploadInput.addEventListener('change', e => readFiles(e.target.files));
+input.addEventListener('paste', e => {
+  e.preventDefault();
+  allText.push((e.clipboardData || window.clipboardData).getData('text'));
+  e.target.innerText = allText.join('\n');
+});
 
 let uploadButton = document.querySelector('.btn-upload');
 uploadButton.addEventListener('click', () => uploadInput.click());
+
+let uploadInput = document.querySelector('.uploader');
+uploadInput.addEventListener('change', e => readFiles(e.target.files));
 
 input.addEventListener('drop', e => {
   e.preventDefault();
@@ -26,9 +32,9 @@ function readFiles(files) {
     if (/\.(js|jsx|ts|tsx)$/.test(file.name)) {
       let reader = new FileReader();
       reader.readAsText(file);
-
       reader.onload = () => {
-        input.innerText = reader.result + '\n' + input.innerText;
+        allText.push(reader.result);
+        input.innerText += reader.result + '\n';
       };
       reader.onerror = () => {
         console.log(reader.error);
