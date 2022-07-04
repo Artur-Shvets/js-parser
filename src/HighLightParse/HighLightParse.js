@@ -14,15 +14,11 @@ import {
   getTags,
   getConstants,
   getAllComments,
-} from './hooks/index.js';
+} from '../hooks/index.js';
 let composeText = [];
 
 // ______________________________________________________________HIGHLIGHT () => {}
-export function getHighLight(
-  rowText,
-  isNewParent = false,
-  needCheckComments = false
-) {
+export function getHighLight(rowText, mainParent, needCheckComments = false) {
   if (!rowText) {
     return '<br>';
   }
@@ -33,14 +29,12 @@ export function getHighLight(
     return rowText;
   }
 
-  [rowText, composeText] = getTags(rowText, composeText, isNewParent);
+  [rowText, composeText] = getTags(rowText, composeText, mainParent);
 
   // ______________________________________________________________Before
   [rowText, composeText] = getKeyWords(rowText, composeText);
 
-  [rowText, composeText] = getDeclarations(rowText, composeText, isNewParent);
-
-  [rowText, composeText] = getAllCalls(rowText, composeText, isNewParent);
+  [rowText, composeText] = getDeclarations(rowText, composeText, mainParent);
 
   [rowText, composeText] = getKeys(rowText, composeText);
 
@@ -55,6 +49,8 @@ export function getHighLight(
   [rowText, composeText] = getObjects(rowText, composeText);
 
   [rowText, composeText] = getNumbers(rowText, composeText);
+
+  [rowText, composeText] = getAllCalls(rowText, composeText, mainParent);
   // ______________________________________________________________After
   [rowText, composeText] = getWords(rowText, composeText);
 

@@ -1,8 +1,7 @@
-import { addColorForBlock, createRow } from './index.js';
+import { addColorForBlock, createRow, input } from '../../hooks/index.js';
 
 export function createParent(
   rowText,
-  input,
   mainParent,
   mainBlock,
   subBlock,
@@ -13,7 +12,8 @@ export function createParent(
   mainParent.setAttribute('contenteditable', 'false');
   mainParent = addColorForBlock(mainParent, rowText);
   input.append(mainParent);
-  rowBlock = createRow(rowText, rowBlock, true);
+
+  rowBlock = createRow(rowText, mainParent);
   mainParent.append(rowBlock);
   mainBlock = mainParent;
 

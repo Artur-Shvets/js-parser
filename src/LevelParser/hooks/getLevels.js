@@ -11,12 +11,17 @@ export function getLevels(infoList) {
   let currentLevel = infoList.parentList.map(parent => {
     parent = new Map(Object.entries(parent));
     parent.delete('callList');
-    return Object.fromEntries(parent);
+    parent = Object.fromEntries(parent);
+    parent.getParent = () =>
+      infoList.parentList.find(parentItem => parentItem.id == parent.id);
+    return parent;
   });
 
   infoList.levelsList = [];
 
-  while (true) {
+  let count = 10;
+  while (count > 0) {
+    count--;
     let nextLevel = [];
     let callNames = [];
     currentLevel.forEach(item => {
@@ -33,8 +38,6 @@ export function getLevels(infoList) {
 
     currentLevel = currentLevel.filter(Boolean);
     if (!currentLevel.length) {
-      nextLevel.length &&
-        infoList.levelsList[infoList.levelsList.length - 1].push(...nextLevel);
       break;
     }
 
@@ -42,5 +45,5 @@ export function getLevels(infoList) {
     currentLevel = nextLevel;
   }
 
-  console.log('infoList', infoList);
+  return infoList;
 }

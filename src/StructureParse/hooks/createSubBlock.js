@@ -3,5 +3,5 @@ export function createSubBlock(subBlock, mainBlock) {
   subBlock.classList.add('sub-block');
   mainBlock.append(subBlock);
 
-  return [subBlock, mainBlock];
+  return subBlock;
 }

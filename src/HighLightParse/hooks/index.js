@@ -1,6 +1,5 @@
-export * from '../../StructureParse/hooks/index.js';
 export * from '../Patterns.js';
-export * from '../HighLightParse.js';
+// export * from '../HighLightParse.js';
 // _____________________________________________ BRACKETS
 export * from './getRegex.js';
 export * from './getAngleBrackets.js';
