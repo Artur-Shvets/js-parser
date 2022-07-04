@@ -1,9 +1,10 @@
-import { getHighLight } from './index.js';
+import { getHighLight } from '../../hooks/index.js';
 
-export function createRow(rowText, rowBlock, isNewParent = false) {
-  rowBlock = document.createElement('div');
+export function createRow(rowText, mainParent) {
+  let rowBlock = document.createElement('div');
   rowBlock.classList.add('row');
-  rowBlock.innerHTML = getHighLight(rowText, isNewParent);
+
+  rowBlock.innerHTML = getHighLight(rowText, mainParent);
 
   return rowBlock;
 }

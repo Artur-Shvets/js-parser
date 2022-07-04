@@ -63,7 +63,6 @@ export function getAllComments(rowText, composeText) {
 
   [rowText, composeText] = getStrings(rowText, composeText);
   [rowText, composeText] = getComments(rowText, composeText);
-  [rowText, composeText] = getRegex(rowText, composeText);
 
   return [rowText, composeText];
 }

@@ -1,4 +1,4 @@
-import { patterns, updateInfoList } from './index.js';
+import { patterns, updateInfoList } from '../../hooks/index.js';
 
 export function getAllCalls(text, composeText, isNewParent) {
   text = text.replace(patterns.callFunctions, (g0, g1, index) => {
@@ -15,6 +15,15 @@ export function getAllCalls(text, composeText, isNewParent) {
     ] = `<span ${id} class="block blue-string blue-shadow call-func ${g1}">${g1}</span>`;
 
     return '~'.repeat(g1.length);
+  });
+
+  text = text.replace(patterns.callComponents, (g0, index) => {
+    updateInfoList({ call: true, name: g0, role: 'function', isNewParent });
+    composeText[
+      index
+    ] = `<span class="block blue-string blue-shadow call-com ${g0}">${g0}</span>`;
+
+    return '~'.repeat(g0.length);
   });
 
   text = text.replace(patterns.callVariables, (g0, index) => {

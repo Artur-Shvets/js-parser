@@ -1,20 +1,42 @@
 'use strict';
 
-import { changeMode } from './src/DarkLightMode/DarkLightMode.js';
-import { parserCore } from './src/StructureParse/StructureParse.js';
-import { input } from './src/StructureParse/StructureParse.js';
+import {
+  structureParse,
+  runLevelParser,
+  createEvents,
+  changeMode,
+  doDynamicAllLinks,
+  allText,
+  parseButton,
+  changeModeToggle,
+  uploadButton,
+  uploadInput,
+  input,
+  separator,
+  main,
+  infoList,
+} from './src/hooks/index.js';
 
-let parseButton = document.querySelector('.btn-parse');
-parseButton.addEventListener('click', () => parserCore());
+function runParserCors() {
+  structureParse();
+  runLevelParser(infoList);
+  createEvents(infoList);
+  console.log('infoList >>>', infoList);
+}
 
-let changeModeToggle = document.querySelector('#change-mode');
+parseButton.addEventListener('click', () => runParserCors());
+
 changeModeToggle.addEventListener('click', () => changeMode());
 
-let uploadInput = document.querySelector('.uploader');
-uploadInput.addEventListener('change', e => readFiles(e.target.files));
+input.addEventListener('paste', e => {
+  e.preventDefault();
+  allText.push((e.clipboardData || window.clipboardData).getData('text'));
+  e.target.innerText = allText.join('\n');
+});
 
-let uploadButton = document.querySelector('.btn-upload');
 uploadButton.addEventListener('click', () => uploadInput.click());
+
+uploadInput.addEventListener('change', e => readFiles(e.target.files));
 
 input.addEventListener('drop', e => {
   e.preventDefault();
@@ -26,9 +48,9 @@ function readFiles(files) {
     if (/\.(js|jsx|ts|tsx)$/.test(file.name)) {
       let reader = new FileReader();
       reader.readAsText(file);
-
       reader.onload = () => {
-        input.innerText = reader.result + '\n' + input.innerText;
+        allText.push(reader.result);
+        input.innerText += reader.result + '\n';
       };
       reader.onerror = () => {
         console.log(reader.error);
@@ -36,3 +58,22 @@ function readFiles(files) {
     }
   }
 }
+
+// ___________________________________ FLOW CHART _____________________________________
+
+let mouseDown = { separator: false };
+
+separator.addEventListener('mousedown', e => {
+  mouseDown.separator = true;
+});
+
+main.onmousemove = e => {
+  if (mouseDown.separator) {
+    main.style.gridTemplateColumns = `${e.clientX - 12}px 5px auto`;
+    doDynamicAllLinks();
+  }
+};
+
+document.onmouseup = e => {
+  mouseDown.separator = mouseDown.separator && false;
+};

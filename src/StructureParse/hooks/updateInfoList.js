@@ -12,7 +12,7 @@ export function updateInfoList({
   name = false,
   role = false,
   multiLine = false,
-  isNewParent = false,
+  mainParent = false,
 }) {
   let { functionNames, variableNames } = infoList.declarationList;
   let result = '';
@@ -32,18 +32,19 @@ export function updateInfoList({
       ? infoList.declarationList.functionNames.push(name)
       : infoList.declarationList.variableNames.push(name);
     result = id;
-  } else if (
-    role === 'function'
-      ? functionNames.includes(name)
-      : variableNames.includes(name)
-  ) {
-    if (isNewParent && declaration) {
+  } else if (functionNames.includes(name) || variableNames.includes(name)) {
+    if (mainParent && declaration) {
       infoList.parentList.push({ ...newBlock, callList: [] });
-      result = id;
+      mainParent.id = id;
+      result = '';
     } else {
       let index = infoList.parentList.length && infoList.parentList.length - 1;
-      infoList.parentList[index].callList.push(newBlock);
-      result = id;
+      if (infoList.parentList[index]?.name === name) {
+        infoList.parentList[index].callList = [];
+      } else {
+        infoList.parentList[index]?.callList?.push(newBlock);
+        result = id;
+      }
     }
   }
 

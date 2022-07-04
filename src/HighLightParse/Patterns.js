@@ -1,8 +1,10 @@
 export const patterns = {
   // _______________________________________________ BRACKETS
   regex: /\/.+\/\w*/g,
-  openAngle: /(^\s*?>|<[^<\/]*?[^\/]>|<\w*?)\s*?(\/\/|\/\*|$)/,
-  closedAngle: /^\s*?(<\/.*?>|\/?>)/,
+  // openAngle: /(^\s*?>|<[^<\/]*?[^\/]>|<\w*?)\s*?(\/\/|\/\*|$)/,
+  openAngle: /^\s*(>|<[^\/=<>].*?[^\/=<\w>]>|<\w*>)/,
+  // closedAngle: /^\s*?(<\/.*?>|\/?>)/,
+  closedAngle: /^\s*(.*<\/.*?>)/,
   angleBrace: /(<)|(>)/g,
   openBrackets: /(\{|\[|\()\s*(\/\/|$)/,
   closedBrackets: /^\s*?(\}|\]|\))/,
@@ -27,6 +29,8 @@ export const patterns = {
   varNames: '(const|let|var)(\\s+)(\\w+)',
   // ________________________________________________ ALL CALLS
   callFunctions: /(\w+?)(?=\s*?\()/g,
+  // callComponents: /(?<!\.)\b\w+(?=\s*?=)/,
+  callComponents: /(?<=<)\w+/g,
   callVariables: /(?<!\.)\b\w+/g,
   keys: /\w+(?=:)/g,
   constants: /(?<!>)\b[A-Z_?]+\b(?!<)/,
@@ -39,7 +43,7 @@ export const patterns = {
   words: /\b\w+?\b/g,
   symbols: /[^\w\s~]+/g,
   spaces: /\s+/g,
-  // callComponents: /(?<!\.)\b\w+(?=\s*?=)/,
+
   allTagsNames:
     /\b(a|u|ul|abbr|div|script|section|select|small|source|span|table|tbody|td|textarea|th|thead|title|tr|body|br|button|canvas|label|legend|li|link|main|acronym|address|h1|h2|h3|h4|h5|h6|head|header|hr|html|font|footer|form|frame|i|iframe|img|input|applet|area|article|aside|audio|b|base|basefont|bdi|bdo|big|blockquote|caption|center|cite|code|col|colgroup|data|datalist|dd|del|details|dfn|dialog|dir|dl|dt|em|embed|fieldset|figcaption|figure|frameset|ins|kbd|map|mark|menu|menuitem|meta|meter|nav|noframes|noscript|object|ol|optgroup|option|output|p|param|picture|pre|progress|q|rp|rt|ruby|s|samp|strike|strong|style|sub|summary|sup|tfoot|time|track|tt|var|video|wbr)\b/,
 };

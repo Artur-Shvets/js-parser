@@ -1,14 +1,13 @@
 import { addColorForBlock, createRow, createSubBlock } from './index.js';
 
-export function createMainBlock(rowText, input, mainBlock, subBlock, rowBlock) {
+export function createMainBlock(rowText, mainBlock, subBlock, rowBlock) {
   mainBlock = document.createElement('div');
   mainBlock.classList.add('main-block');
   subBlock.append(mainBlock);
   mainBlock = addColorForBlock(mainBlock, rowText);
-  rowBlock = createRow(rowText, rowBlock);
+  rowBlock = createRow(rowText);
   mainBlock.append(rowBlock);
-  [subBlock, mainBlock] = createSubBlock(subBlock, mainBlock);
-  mainBlock.append(subBlock);
+  subBlock = createSubBlock(subBlock, mainBlock);
 
-  return [input, mainBlock, subBlock, rowBlock];
+  return [mainBlock, subBlock, rowBlock];
 }

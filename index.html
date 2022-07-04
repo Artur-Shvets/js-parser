@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/HighLightParse/HighLightParse.css" />
     <link rel="stylesheet" href="src/DarkLightMode/DarkLightMode.css" />
+    <link rel="stylesheet" href="./app.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     <title>JS Parser</title>
   </head>
 
@@ -29,7 +30,15 @@
       </div>
     </div>
 
-    <div id="input" class="editor" contenteditable="true" autofocus></div>
+    <div id="main">
+      <div id="work-space">
+        <div id="svg-space" class="svg-space"></div>
+        <div id="blur-space"></div>
+        <div id="map-space" class="window" contenteditable="false"></div>
+      </div>
+      <div id="separator"></div>
+      <div id="input" class="window" contenteditable="true" autofocus></div>
+    </div>
   </body>
 
   <footer>

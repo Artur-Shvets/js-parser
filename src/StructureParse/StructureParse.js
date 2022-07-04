@@ -8,12 +8,11 @@ import {
   checkIsEmpty,
   patterns,
   getAllDeclarations,
-  getLevels,
   getHighLight,
-  infoList,
-} from './hooks/index.js';
+  input
+} from '../hooks/index.js';
 
-export let input = document.getElementById('input');
+export let allText = [];
 let inputText;
 let openBrace;
 let closedBrace;
@@ -28,9 +27,9 @@ function createEmpty() {
   rowBlock = document.createElement('br');
 }
 
-export function parserCore() {
-  getAllDeclarations(input.innerText);
-  inputText = input.innerText.split('\n');
+export function structureParse() {
+  getAllDeclarations(allText.join('\n'));
+  inputText = allText.join('\n').split('\n');
   input.innerText = null;
   inputText.forEach(rowText => {
     rowText = rowText.replace(/^\s*/, '');
@@ -41,6 +40,8 @@ export function parserCore() {
         rowText = getHighLight(rowText, false, true);
       }
 
+      let isTag =
+        patterns.openAngle.test(rowText) || patterns.closedAngle.test(rowText);
       openBrace =
         patterns.openAngle.test(rowText) || patterns.openBrackets.test(rowText);
       closedBrace =
@@ -49,26 +50,24 @@ export function parserCore() {
 
       if (openBrace && !closedBrace) {
         if (mainParent) {
-          [input, mainBlock, subBlock, rowBlock] = createMainBlock(
+          [mainBlock, subBlock, rowBlock] = createMainBlock(
             rowText,
-            input,
             mainBlock,
             subBlock,
             rowBlock
           );
         } else {
-          [input, mainParent, mainBlock, subBlock, rowBlock] = createParent(
+          [mainParent, mainBlock, subBlock, rowBlock] = createParent(
             rowText,
-            input,
             mainParent,
             mainBlock,
             subBlock,
             rowBlock
           );
-          [subBlock, mainBlock] = createSubBlock(subBlock, mainBlock);
+          subBlock = createSubBlock(subBlock, mainBlock);
         }
       } else if (!openBrace && closedBrace && mainBlock) {
-        rowBlock = createRow(rowText, rowBlock);
+        rowBlock = createRow(rowText);
         mainBlock.append(rowBlock);
         [mainParent, mainBlock, subBlock] = getPreviousBlocks(
           mainParent,
@@ -76,15 +75,20 @@ export function parserCore() {
           subBlock
         );
       } else if (openBrace && closedBrace) {
-        rowBlock = createRow(rowText, rowBlock);
-        mainBlock.append(rowBlock);
-        [subBlock, mainBlock] = createSubBlock(subBlock, mainBlock);
+        if (isTag) {
+          rowBlock = createRowBlock(rowText);
+          subBlock.append(rowBlock);
+        } else {
+          rowBlock = createRow(rowText);
+          mainBlock.append(rowBlock);
+          subBlock = createSubBlock(subBlock, mainBlock);
+        }
       } else {
         if (mainParent) {
           if (isEmpty) {
             createEmpty();
           } else {
-            rowBlock = createRowBlock(rowText, rowBlock);
+            rowBlock = createRowBlock(rowText);
           }
 
           if (subBlock) {
@@ -97,9 +101,8 @@ export function parserCore() {
             createEmpty();
             input.append(rowBlock);
           } else {
-            createParent(
+            [mainParent, mainBlock, subBlock, rowBlock] = createParent(
               rowText,
-              input,
               mainParent,
               mainBlock,
               subBlock,
@@ -114,5 +117,4 @@ export function parserCore() {
       }
     }
   });
-  getLevels(infoList);
 }

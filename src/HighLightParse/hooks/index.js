@@ -1,6 +1,5 @@
-export * from '../../StructureParse/hooks/index.js';
 export * from '../Patterns.js';
-export * from '../HighLightParse.js';
+// export * from '../HighLightParse.js';
 // _____________________________________________ BRACKETS
 export * from './getRegex.js';
 export * from './getAngleBrackets.js';
@@ -18,7 +17,6 @@ export * from './getStrings.js';
 // ======================================== <<<< Before >>>>
 export * from './getKeyWords.js';
 // ________________________________________ ALL DECLARATION
-export * from './getAllFuncNames.js';
 export * from './getAllDeclarations.js';
 // __________________________________________ ALL CALLS
 export * from './getAllCalls.js';
