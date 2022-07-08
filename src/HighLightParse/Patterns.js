@@ -8,7 +8,7 @@ export const patterns = {
   angleBrace: /(<)|(>)/g,
   openBrackets: /(\{|\[|\()\s*(\/\/|$)/,
   closedBrackets: /^\s*?(\}|\]|\))/,
-  tags: /(<\/?\s*?)(\w*)(>?)/g,
+  tags: /(<\/?\s*?)([a-z|0-9]*)(>?)/g,
   // _______________________________________________ COMMENTS
   comments: /\/\/.+/,
   openMultiComments: /\/\*.*/,
@@ -27,10 +27,12 @@ export const patterns = {
   arrowFuncNames: '(const|let|var)(\\s+)(\\w+)(?=.*=\\s*?\\()',
   funcNames: '(function)(\\s+)(\\w+)(?=.*\\s*?\\()',
   varNames: '(const|let|var)(\\s+)(\\w+)',
+  componentsNames: /\b[A-Z]\w*[a-z]\w*/,
   // ________________________________________________ ALL CALLS
   callFunctions: /(\w+?)(?=\s*?\()/g,
   // callComponents: /(?<!\.)\b\w+(?=\s*?=)/,
-  callComponents: /(?<=<)\w+/g,
+  callComponents: /(?<=<)([A-Z]\w*)/,
+  // callComponents: /(?<=<)\w+/g,
   callVariables: /(?<!\.)\b\w+/g,
   keys: /\w+(?=:)/g,
   constants: /(?<!>)\b[A-Z_?]+\b(?!<)/,

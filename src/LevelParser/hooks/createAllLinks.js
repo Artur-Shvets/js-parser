@@ -5,8 +5,8 @@ export function createAllLinks(parentList) {
     if (parent.callList?.length) {
       let v1Id = 'v1' + parent.id.slice(2);
       let parentBlock = document.getElementById(parent.id);
-      let parentRowBlock = parentBlock?.firstChild;
-      if (!parentRowBlock?.firstChild.classList.contains('v1')) {
+      let parentRowBlock = parentBlock.firstChild;
+      if (!parentRowBlock.firstChild.classList.contains('v1')) {
         let vertex1 = createVertex(parentRowBlock, 1, parent.role);
         vertex1.id = v1Id;
       }
@@ -20,7 +20,7 @@ export function createAllLinks(parentList) {
         let svg = createLink(callItem.role);
 
         if (!callRowBlock?.lastChild.classList.contains('v2')) {
-          let vertex2 = createVertex(callRowBlock, 2, callParent?.role);
+          let vertex2 = createVertex(callRowBlock, 2, callParent.role);
           vertex2.id = v2Id;
         }
 

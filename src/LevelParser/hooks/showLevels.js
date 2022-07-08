@@ -14,9 +14,17 @@ export function showLevels(levelsList) {
 
       let rowBlock = document.createElement('div');
       rowBlock.classList.add('row');
-      item.role === 'function'
-        ? (rowBlock.innerHTML = `<span class="blue-string">${item.name}</span>`)
-        : (rowBlock.innerHTML = `<span class="white-string">${item.name}</span>`);
+      switch (item.role) {
+        case 'function':
+          rowBlock.innerHTML = `<span class="blue-string">${item.name}</span>`;
+          break;
+        case 'component':
+          rowBlock.innerHTML = `<span class="blue-string">${item.name}</span>`;
+          break;
+        case 'variable':
+          rowBlock.innerHTML = `<span class="white-string">${item.name}</span>`;
+          break;
+      }
       mainBlock.append(rowBlock);
 
       levelColumn.append(mainBlock);

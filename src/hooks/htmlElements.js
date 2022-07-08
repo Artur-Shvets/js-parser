@@ -7,3 +7,5 @@ export let mapSpace = document.getElementById('map-space');
 export let svgSpace = document.getElementById('svg-space');
 export let separator = document.getElementById('separator');
 export let main = document.getElementById('main');
+
+window.mapSpace = mapSpace;
