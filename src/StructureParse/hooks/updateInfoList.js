@@ -1,6 +1,7 @@
 export let infoList = {
   declarationList: {
     functionNames: [],
+    componentNames: [],
     variableNames: [],
   },
   parentList: [],
@@ -14,8 +15,8 @@ export function updateInfoList({
   multiLine = false,
   mainParent = false,
 }) {
-  let { functionNames, variableNames } = infoList.declarationList;
-  let result = '';
+  let { functionNames, variableNames, componentNames } =
+    infoList.declarationList;
 
   let id = 'id' + Math.random().toString(16).slice(7);
 
@@ -28,25 +29,25 @@ export function updateInfoList({
   };
 
   if (multiLine) {
-    role === 'function'
-      ? infoList.declarationList.functionNames.push(name)
-      : infoList.declarationList.variableNames.push(name);
-    result = id;
-  } else if (functionNames.includes(name) || variableNames.includes(name)) {
+    role === 'function' && infoList.declarationList.functionNames.push(name);
+    role === 'component' && infoList.declarationList.componentNames.push(name);
+    role === 'variable' && infoList.declarationList.variableNames.push(name);
+  } else if (
+    (role === 'function' && functionNames.includes(name)) ||
+    (role === 'component' && componentNames.includes(name)) ||
+    (role === 'variable' && variableNames.includes(name))
+  ) {
     if (mainParent && declaration) {
       infoList.parentList.push({ ...newBlock, callList: [] });
       mainParent.id = id;
-      result = '';
+      return id;
     } else {
       let index = infoList.parentList.length && infoList.parentList.length - 1;
-      if (infoList.parentList[index]?.name === name) {
-        infoList.parentList[index].callList = [];
-      } else {
-        infoList.parentList[index]?.callList?.push(newBlock);
-        result = id;
-      }
+      // index &&
+      infoList.parentList[index].name === name
+        ? (infoList.parentList[index].callList = [])
+        : infoList.parentList[index].callList.push(newBlock);
+      return '';
     }
   }
-
-  return result;
 }

@@ -37,6 +37,7 @@ export function getLevels(infoList) {
     });
 
     currentLevel = currentLevel.filter(Boolean);
+
     if (!currentLevel.length) {
       break;
     }

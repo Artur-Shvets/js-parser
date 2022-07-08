@@ -17,5 +17,5 @@ export function createParent(
   mainParent.append(rowBlock);
   mainBlock = mainParent;
 
-  return [input, mainParent, mainBlock, subBlock, rowBlock];
+  return [mainParent, mainBlock, subBlock, rowBlock];
 }

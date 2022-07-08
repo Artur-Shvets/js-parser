@@ -5,11 +5,11 @@ export function getTags(text, composeText, mainParent) {
     let id = updateInfoList({
       call: true,
       name: g2,
-      role: 'react-component',
+      role: 'component',
       mainParent,
     });
-    let className = id ? 'orange-string call-comp ' + g2 : 'red-string';
-    let idText = id ? `id="${id}"` : '';
+    let className = id ? 'orange-string ' + g2 : 'red-string';
+    let idText = id && `id="${id}"`;
     composeText[
       index + g1.length
     ] = `<span ${idText} class="${className}">${g2}</span>`;

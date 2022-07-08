@@ -18,7 +18,10 @@ export function runLevelParser(infoList) {
   showLevels([...infoList.levelsList].reverse());
   createAllLinks(infoList.parentList);
   doDynamicAllLinks();
-  input.innerHTML = infoList.levelsList[0][0].getParent().html;
 
-  return infoList;
+  infoList.levelsList[0] &&
+    (input.innerHTML = infoList.levelsList[0][0].getParent().html);
+  // console.log(infoList);
+
+  // return infoList;
 }
